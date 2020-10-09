@@ -1,5 +1,5 @@
 
-all: icsexport.exe
+# wsf = 工作区根目录
 
-icsexport.exe: icsexport.c
-	gcc $(wsrf)\src\icsexport.c -o $(wsrf)\bin\icsexport.exe
+build: $(wsf)\src\icsexport.c
+	gcc $(wsf)\src\icsexport.c -o $(wsf)\bin\icsexport.exe
