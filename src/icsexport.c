@@ -31,11 +31,14 @@ void argFlagDealer();                             //SM1.B.4
 
 int main(int argc, char *argv[])
 {
+    //开始阶段
     setlocale(LC_ALL, "");
     readArguments(argc, argv);
     argFlagDealer();
     if (argFlag & ABORT)
         return 0;
+    //读取文件
+    
     return 0;
 }
 
