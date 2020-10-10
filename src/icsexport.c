@@ -9,7 +9,6 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <locale.h>
 
 #define NAME_MAX 255 //SM2.C.1
 
@@ -32,7 +31,6 @@ void argFlagDealer();                             //SM1.B.4
 int main(int argc, char *argv[])
 {
     //开始阶段
-    setlocale(LC_ALL, "");
     readArguments(argc, argv);
     argFlagDealer();
     if (argFlag & ABORT)
@@ -58,18 +56,18 @@ void readArguments(int argc, const char *argv[])
             else
                 filenameReader(argv[i]);
         }
+        return;
     }
-    return;
 }
 
 void putUsage()
 {
-    wprintf(L"使用方法：icsexport.exe [参数] [脚本文件名] [iCalendar文件名]\n"
-            "参数：\n"
-            "  -h | --help    打印帮助文本，此时不会进行脚本转换\n\n"
-            "注意：\n"
-            "无参数时默认添加--help参数，没有--help参数时，多余的内容会被忽略。\n"
-            "若未输入[iCalendar文件名]，则按照脚本文件名处理。");
+    printf("使用方法：icsexport.exe [参数] [脚本文件名] [iCalendar文件名]\n"
+           "参数：\n"
+           "  -h | --help    打印帮助文本，此时不会进行脚本转换\n\n"
+           "注意：\n"
+           "无参数时默认添加--help参数，没有--help参数时，多余的内容会被忽略。\n"
+           "若未输入[iCalendar文件名]，则按照脚本文件名处理。");
 }
 
 void argumentTranslator(const char *arg)
@@ -106,7 +104,7 @@ void filenameReader(const char *arg)
 void argFlagDealer()
 {
     if (argFlag & UNDEFINED_ARG)
-        wprintf(L"错误：存在未知参数，请检查参数列表。\n\n");
+        printf("错误：存在未知参数，请检查参数列表。\n\n");
     if (argFlag & PRINT_HELP)
         putUsage();
     return;
