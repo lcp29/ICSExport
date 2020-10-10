@@ -9,15 +9,17 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define NAME_MAX 255 //SM2.C.1
 
 //SM2.F.1
 int argFlag = 0; //SM2.F.1
 
-#define PRINT_HELP 1    //SM2.C.2
-#define ABORT 2         //SM2.C.3
-#define UNDEFINED_ARG 4 //SM2.C.4
+#define PRINT_HELP 1              //SM2.C.2
+#define ABORT 1 << 1              //SM2.C.3
+#define UNDEFINED_ARG 1 << 2      //SM2.C.4
+#define TOO_MANY_FILENAMES 1 << 3 //SM2.C.5
 
 char infileName[NAME_MAX];  //SM2.S.1
 char outfileName[NAME_MAX]; //SM2.S.2
@@ -36,7 +38,7 @@ int main(int argc, char *argv[])
     if (argFlag & ABORT)
         return 0;
     //读取文件
-    
+
     return 0;
 }
 
@@ -98,6 +100,10 @@ void filenameReader(const char *arg)
         strncpy(outfileName, arg, NAME_MAX);
         ++counter;
     }
+    else
+    {
+        argFlag |= TOO_MANY_FILENAMES;
+    }
     return;
 }
 
@@ -105,6 +111,8 @@ void argFlagDealer()
 {
     if (argFlag & UNDEFINED_ARG)
         printf("错误：存在未知参数，请检查参数列表。\n\n");
+    if (argFlag & TOO_MANY_FILENAMES)
+        printf("警告：检测到有多于两个的文件名被传入，多余的部分将被忽略。\n\n");
     if (argFlag & PRINT_HELP)
         putUsage();
     return;
