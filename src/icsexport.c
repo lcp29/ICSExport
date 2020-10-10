@@ -9,18 +9,19 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <locale.h>
 
-#define NAME_MAX 255  //SM2.C.1
+#define NAME_MAX 255 //SM2.C.1
 
 //SM2.F.1
-int argFlag = 0;      //SM2.F.1
+int argFlag = 0; //SM2.F.1
 
-#define PRINT_HELP 1  //SM2.C.2
-#define ABORT 2       //SM2.C.3
+#define PRINT_HELP 1    //SM2.C.2
+#define ABORT 2         //SM2.C.3
 #define UNDEFINED_ARG 4 //SM2.C.4
 
-char infileName[NAME_MAX];    //SM2.S.1
-char outfileName[NAME_MAX];   //SM2.S.2
+char infileName[NAME_MAX];  //SM2.S.1
+char outfileName[NAME_MAX]; //SM2.S.2
 
 void readArguments(int argc, const char *argv[]); //SM1.B.1
 void putUsage();                                  //SM1.O.1
@@ -30,9 +31,11 @@ void argFlagDealer();                             //SM1.B.4
 
 int main(int argc, char *argv[])
 {
+    setlocale(LC_ALL, "");
     readArguments(argc, argv);
     argFlagDealer();
-    if(argFlag & ABORT) return 0;
+    if (argFlag & ABORT)
+        return 0;
     return 0;
 }
 
@@ -45,9 +48,9 @@ void readArguments(int argc, const char *argv[])
     }
     else
     {
-        for (int i = 1; i < argc - 1; ++i)
+        for (int i = 1; i <= argc - 1; ++i)
         {
-            if(argv[i][0] == '-')
+            if (argv[i][0] == '-')
                 argumentTranslator(argv[i]);
             else
                 filenameReader(argv[i]);
@@ -58,17 +61,17 @@ void readArguments(int argc, const char *argv[])
 
 void putUsage()
 {
-    printf("使用方法：icsexport.exe [参数] [脚本文件名] [iCalendar文件名]\n"
-           "参数：\n"
-           "  -h | --help    打印帮助文本，此时不会进行脚本转换\n\n"
-           "注意：\n"
-           "无参数时默认添加--help参数，没有--help参数时，多余的内容会被忽略。\n"
-           "若未输入[iCalendar文件名]，则按照脚本文件名处理。");
+    wprintf(L"使用方法：icsexport.exe [参数] [脚本文件名] [iCalendar文件名]\n"
+            "参数：\n"
+            "  -h | --help    打印帮助文本，此时不会进行脚本转换\n\n"
+            "注意：\n"
+            "无参数时默认添加--help参数，没有--help参数时，多余的内容会被忽略。\n"
+            "若未输入[iCalendar文件名]，则按照脚本文件名处理。");
 }
 
 void argumentTranslator(const char *arg)
 {
-    if(!strcmp(arg, "h") || !strcmp(arg, "-help"))
+    if (!strcmp(arg, "-h") || !strcmp(arg, "--help"))
     {
         argFlag |= PRINT_HELP;
         argFlag |= ABORT;
@@ -84,12 +87,12 @@ void argumentTranslator(const char *arg)
 void filenameReader(const char *arg)
 {
     static int counter = 0; //存储当前的读取状态
-    if(counter == 0) //第一次执行
+    if (counter == 0)       //第一次执行
     {
         strncpy(infileName, arg, NAME_MAX);
         ++counter;
     }
-    else if(counter == 1) //第二次执行
+    else if (counter == 1) //第二次执行
     {
         strncpy(outfileName, arg, NAME_MAX);
         ++counter;
@@ -99,9 +102,9 @@ void filenameReader(const char *arg)
 
 void argFlagDealer()
 {
-    if(argFlag & UNDEFINED_ARG)
-        printf("错误：存在未知参数，请检查参数列表。\n\n");
-    if(argFlag & PRINT_HELP)
+    if (argFlag & UNDEFINED_ARG)
+        wprintf(L"错误：存在未知参数，请检查参数列表。\n\n");
+    if (argFlag & PRINT_HELP)
         putUsage();
     return;
 }
