@@ -17,6 +17,11 @@ int main(int argc, char *argv[])
     if (argFlag & ABORT)
         return 0;
     //读取文件
-    
+    openScript();
+    fileFlagDealer();
+    if (fileFlag & ABORT)
+        return 0; //是安全的
+
+    closeScript();
     return 0;
 }
