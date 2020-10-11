@@ -21,9 +21,9 @@
 #define ONE_FILENAME 1 << 4       //SM2.C.6
 
 //SM2.F.2
-//#define ABORT 1
-#define OPEN_ERROR 1 << 1 //SM2.C.8
-#define SEOF 1 << 2       //SM2.C.9
+#define OPEN_ERROR 1      //SM2.C.8
+//#define ABORT 1 << 1
+#define SEOF 1 << 2       //SM2.C.13
 
 #define UID_LENGTH 31  //SM2.C.9
 #define LOC_MAX 31     //SM2.C.10
@@ -44,7 +44,6 @@ typedef struct VEVENT //SM3.1
 
 typedef struct CNUM //SM3.2
 {
-    int id;
     char CBEGIN[7];
     char CEND[7];
 };
@@ -57,6 +56,10 @@ extern char outfileName[NAME_MAX]; //SM2.S.2
 
 extern char firstMonday[9]; //SM2.S.3
 extern char lbuf[LINE_MAX]; //SM2.S.4
+
+extern struct CNUM *clses;  //SM2.T.1
+
+extern int numOfClasses = 1;//SM2.O.1
 
 //boot.c
 void readArguments(int argc, const char *argv[]); //SM1.B.1
@@ -76,7 +79,12 @@ void nextWeek(const char *now, char *next);               //SM1.D.5
 void lastWeek(const char *now, char *last);               //SM1.D.6
 
 //fop.c
-void openScript();     //SM1.F.1
-void fileFlagDealer(); //SM1.F.2
-void closeScript();    //SM1.F.3
-void readLine();       //SM1.F.4
+void openScript();                  //SM1.F.1
+void fileFlagDealer();              //SM1.F.2
+void closeScript();                 //SM1.F.3
+void readLine();                    //SM1.F.4
+void readNextUnemptyLine();         //SM1.F.5
+void readNextUnannoedUnemptyLine(); //SM1.F.6
+
+//proc.c
+void readHead(); //SM1.P.6

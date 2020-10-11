@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     fileFlagDealer();
     if (fileFlag & ABORT)
         return 0; //是安全的
-
+    readHead();
     closeScript();
     return 0;
 }

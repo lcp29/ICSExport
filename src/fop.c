@@ -51,7 +51,46 @@ void closeScript()
 void readLine()
 {
     fgets(lbuf, LINE_MAX, src);
-    if(feof(src))
+    if (feof(src))
         fileFlag |= SEOF;
+    return;
+}
+
+/* readNextUnemptyLine()的正确用法
+    while(1)
+    {
+        readNextUnemptyLine();
+        if(fileFlag & SEOF)
+            break;
+        printf("%s", lbuf);
+    }
+*/
+
+void readNextUnemptyLine()
+{
+    int isEmpty = 1;
+    while (isEmpty && !(fileFlag & SEOF))
+    {
+        readLine();
+        for (int i = 0; lbuf[i] != '\0'; ++i)
+            if (lbuf[i] != ' ' && lbuf[i] != '\n' && lbuf[i] != '\t')
+            {
+                isEmpty = 0;
+                break;
+            }
+    }
+    return;
+}
+
+void readNextUnannoedUnemptyLine()
+{
+    int isAnnoed = 1;
+    int i = 0;
+    while (isAnnoed && !(fileFlag & SEOF))
+    {
+        readNextUnemptyLine();
+        if(lbuf[i] != '#') //以#开头是注释
+            isAnnoed = 0;
+    }
     return;
 }

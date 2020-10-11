@@ -15,3 +15,7 @@ char outfileName[NAME_MAX]; //SM2.S.2
 char firstMonday[9]; //SM2.S.3
 
 char lbuf[LINE_MAX]; //SM2.S.4
+
+struct CNUM *clses; //SM2.T.1
+
+int numOfClasses = 1; //SM2.O.1
