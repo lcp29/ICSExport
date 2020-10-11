@@ -22,3 +22,12 @@ extern int argFlag; //SM2.F.1
 
 extern char infileName[NAME_MAX];  //SM2.S.1
 extern char outfileName[NAME_MAX]; //SM2.S.2
+
+//boot.c
+void readArguments(int argc, const char *argv[]); //SM1.B.1
+void argumentTranslator(const char *arg);         //SM1.B.2
+void filenameReader(const char *arg);             //SM1.B.3
+void argFlagDealer();                             //SM1.B.4
+
+//other.c
+void putUsage();                                  //SM1.O.1
