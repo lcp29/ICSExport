@@ -47,11 +47,13 @@ void filenameReader(const char *arg)
     if (counter == 0)       //第一次执行
     {
         strncpy(infileName, arg, NAME_MAX);
+        argFlag |= ONE_FILENAME;
         ++counter;
     }
     else if (counter == 1) //第二次执行
     {
         strncpy(outfileName, arg, NAME_MAX);
+        argFlag &= ~ONE_FILENAME;
         ++counter;
     }
     else

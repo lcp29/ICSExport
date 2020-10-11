@@ -1,7 +1,7 @@
 
 CC = gcc
 
-FILE_SRC = icsexport global boot other
+FILE_SRC = icsexport global boot other dateop
 FILE_H = defs.h
 
 build: $(addprefix src/, $(addsuffix .c, $(FILE_SRC))) $(addprefix src/, $(FILE_H))
