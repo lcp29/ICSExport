@@ -20,7 +20,11 @@ void readHead()
         readNextUnannoedUnemptyLine();     //                           ...
         sscanf(lbuf, "%6s-%6s", clses[i].CBEGIN, clses[i].CEND);
     }
-    
+    return;
+}
+
+void freeMem()
+{
     free(clses);
     return;
 }

@@ -23,5 +23,6 @@ int main(int argc, char *argv[])
         return 0; //是安全的
     readHead();
     closeScript();
+    freeMem();
     return 0;
 }

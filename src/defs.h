@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define NAME_MAX 255 //SM2.C.1
 #define LINE_MAX 255 //SM2.C.7
@@ -87,4 +88,5 @@ void readNextUnemptyLine();         //SM1.F.5
 void readNextUnannoedUnemptyLine(); //SM1.F.6
 
 //proc.c
-void readHead(); //SM1.P.6
+void readHead(); //SM1.P.1
+void freeMem();  //SM1.P.2
