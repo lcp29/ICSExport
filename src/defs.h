@@ -43,13 +43,14 @@ typedef struct VEVENT //SM3.1
     int recCount;
     char LOCATION[LOC_MAX + 1];
     char DESCRIPTION[DES_MAX + 1];
-}VEVENT;
+    char SUMMARY[SUMMARY_MAX + 1];
+} VEVENT;
 
 typedef struct CNUM //SM3.2
 {
     char CBEGIN[7];
     char CEND[7];
-}CNUM;
+} CNUM;
 
 extern int argFlag;  //SM2.F.1
 extern int fileFlag; //SM2.F.2
@@ -60,9 +61,11 @@ extern char outfileName[NAME_MAX]; //SM2.S.2
 extern char firstMonday[9]; //SM2.S.3
 extern char lbuf[LINE_MAX]; //SM2.S.4
 
-extern CNUM *clses; //SM2.T.1
+extern CNUM *clses;    //SM2.T.1
+extern VEVENT *events; //SM2.T.2
 
 extern int numOfClasses; //SM2.O.1
+extern int numOfEvents;  //SM2.O.2
 
 //boot.c
 void readArguments(int argc, const char *argv[]); //SM1.B.1
@@ -92,8 +95,10 @@ void readNextUnannoedUnemptyLine(); //SM1.F.6
 //proc.c
 void readHead(); //SM1.P.1
 void freeMem();  //SM1.P.2
+void readBody(); //SM1.P.3
 
 //clk.c
-void genGmStamp(char *stamp); //SM1.C.1
-void genUID(char *uid);       //SM1.C.2
-void randInit();              //SM1.C.3
+void genGmStamp(char *stamp);                //SM1.C.1
+void genUID(char *uid);                      //SM1.C.2
+void randInit();                             //SM1.C.3
+void clsNoToClsTime(char *start, char *end); //SM1.C.4
