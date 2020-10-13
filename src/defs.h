@@ -22,14 +22,16 @@
 #define ONE_FILENAME 1 << 4       //SM2.C.6
 
 //SM2.F.2
-#define OPEN_ERROR 1      //SM2.C.8
+#define OPEN_ERROR 1 //SM2.C.8
 //#define ABORT 1 << 1
-#define SEOF 1 << 2       //SM2.C.13
+#define SEOF 1 << 2 //SM2.C.13
 
 #define UID_LENGTH 31  //SM2.C.9
 #define LOC_MAX 31     //SM2.C.10
 #define SUMMARY_MAX 15 //SM2.C.11
 #define DES_MAX 15     //SM2.C.12
+
+#define TIMEZONE 28800 //2.C.14
 
 typedef struct VEVENT //SM3.1
 {
@@ -58,9 +60,9 @@ extern char outfileName[NAME_MAX]; //SM2.S.2
 extern char firstMonday[9]; //SM2.S.3
 extern char lbuf[LINE_MAX]; //SM2.S.4
 
-extern struct CNUM *clses;  //SM2.T.1
+extern struct CNUM *clses; //SM2.T.1
 
-extern int numOfClasses = 1;//SM2.O.1
+extern int numOfClasses; //SM2.O.1
 
 //boot.c
 void readArguments(int argc, const char *argv[]); //SM1.B.1
@@ -90,3 +92,6 @@ void readNextUnannoedUnemptyLine(); //SM1.F.6
 //proc.c
 void readHead(); //SM1.P.1
 void freeMem();  //SM1.P.2
+
+//clk.c
+void genGmStamp(char *stamp); //SM1.C.1
