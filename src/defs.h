@@ -29,7 +29,7 @@
 #define UID_LENGTH 31  //SM2.C.9
 #define LOC_MAX 31     //SM2.C.10
 #define SUMMARY_MAX 15 //SM2.C.11
-#define DES_MAX 15     //SM2.C.12
+#define DES_MAX 63     //SM2.C.12
 
 #define TIMEZONE 28800 //2.C.14
 
@@ -43,13 +43,13 @@ typedef struct VEVENT //SM3.1
     int recCount;
     char LOCATION[LOC_MAX + 1];
     char DESCRIPTION[DES_MAX + 1];
-};
+}VEVENT;
 
 typedef struct CNUM //SM3.2
 {
     char CBEGIN[7];
     char CEND[7];
-};
+}CNUM;
 
 extern int argFlag;  //SM2.F.1
 extern int fileFlag; //SM2.F.2
@@ -60,7 +60,7 @@ extern char outfileName[NAME_MAX]; //SM2.S.2
 extern char firstMonday[9]; //SM2.S.3
 extern char lbuf[LINE_MAX]; //SM2.S.4
 
-extern struct CNUM *clses; //SM2.T.1
+extern CNUM *clses; //SM2.T.1
 
 extern int numOfClasses; //SM2.O.1
 
@@ -95,3 +95,5 @@ void freeMem();  //SM1.P.2
 
 //clk.c
 void genGmStamp(char *stamp); //SM1.C.1
+void genUID(char *uid);       //SM1.C.2
+void randInit();              //SM1.C.3

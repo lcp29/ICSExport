@@ -14,7 +14,7 @@ void readHead()
     evalFirstMonday(wcnt, mon);
     readNextUnannoedUnemptyLine();
     sscanf(lbuf, "%d", &numOfClasses); //                               6
-    clses = (struct CNUM *)malloc(sizeof(struct CNUM) * numOfClasses);
+    clses = (CNUM *)malloc(sizeof(CNUM) * numOfClasses);
     for (int i = 0; i < numOfClasses; ++i) //                           083000-101500
     {                                      //                           103000-121500
         readNextUnannoedUnemptyLine();     //                           ...

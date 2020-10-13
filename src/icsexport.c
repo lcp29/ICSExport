@@ -12,6 +12,7 @@
 int main(int argc, char *argv[])
 {
     //开始阶段
+    randInit();
     readArguments(argc, argv);
     argFlagDealer();
     if (argFlag & ABORT)
