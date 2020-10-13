@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define NAME_MAX 255 //SM2.C.1
 #define LINE_MAX 255 //SM2.C.7
@@ -21,14 +22,16 @@
 #define ONE_FILENAME 1 << 4       //SM2.C.6
 
 //SM2.F.2
-#define OPEN_ERROR 1      //SM2.C.8
+#define OPEN_ERROR 1 //SM2.C.8
 //#define ABORT 1 << 1
-#define SEOF 1 << 2       //SM2.C.13
+#define SEOF 1 << 2 //SM2.C.13
 
 #define UID_LENGTH 31  //SM2.C.9
 #define LOC_MAX 31     //SM2.C.10
 #define SUMMARY_MAX 15 //SM2.C.11
-#define DES_MAX 15     //SM2.C.12
+#define DES_MAX 63     //SM2.C.12
+
+#define TIMEZONE 28800 //2.C.14
 
 typedef struct VEVENT //SM3.1
 {
@@ -40,13 +43,14 @@ typedef struct VEVENT //SM3.1
     int recCount;
     char LOCATION[LOC_MAX + 1];
     char DESCRIPTION[DES_MAX + 1];
-};
+    char SUMMARY[SUMMARY_MAX + 1];
+} VEVENT;
 
 typedef struct CNUM //SM3.2
 {
     char CBEGIN[7];
     char CEND[7];
-};
+} CNUM;
 
 extern int argFlag;  //SM2.F.1
 extern int fileFlag; //SM2.F.2
@@ -57,9 +61,11 @@ extern char outfileName[NAME_MAX]; //SM2.S.2
 extern char firstMonday[9]; //SM2.S.3
 extern char lbuf[LINE_MAX]; //SM2.S.4
 
-extern struct CNUM *clses;  //SM2.T.1
+extern CNUM *clses;    //SM2.T.1
+extern VEVENT *events; //SM2.T.2
 
-extern int numOfClasses = 1;//SM2.O.1
+extern int numOfClasses; //SM2.O.1
+extern int numOfEvents;  //SM2.O.2
 
 //boot.c
 void readArguments(int argc, const char *argv[]); //SM1.B.1
@@ -87,4 +93,12 @@ void readNextUnemptyLine();         //SM1.F.5
 void readNextUnannoedUnemptyLine(); //SM1.F.6
 
 //proc.c
-void readHead(); //SM1.P.6
+void readHead(); //SM1.P.1
+void freeMem();  //SM1.P.2
+void readBody(); //SM1.P.3
+
+//clk.c
+void genGmStamp(char *stamp);                //SM1.C.1
+void genUID(char *uid);                      //SM1.C.2
+void randInit();                             //SM1.C.3
+void clsNoToClsTime(char *start, char *end); //SM1.C.4

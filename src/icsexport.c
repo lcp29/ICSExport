@@ -12,6 +12,7 @@
 int main(int argc, char *argv[])
 {
     //开始阶段
+    randInit();
     readArguments(argc, argv);
     argFlagDealer();
     if (argFlag & ABORT)
@@ -22,6 +23,8 @@ int main(int argc, char *argv[])
     if (fileFlag & ABORT)
         return 0; //是安全的
     readHead();
+    
     closeScript();
+    freeMem();
     return 0;
 }
