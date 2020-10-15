@@ -25,6 +25,11 @@ void readHead()
 
 void freeMem()
 {
+    for (int i = 0; i < numOfEvents; ++i)
+    {
+        free(events[i].DATETOKEN);
+        free(events[i].TIMETOKEN);
+    }
     free(clses);
     free(events);
     return;
@@ -32,6 +37,8 @@ void freeMem()
 
 void readBody()
 {
+    char dts[MAX_TBUF_SIZE];
+    char tts[MAX_TBUF_SIZE];
     readNextUnannoedUnemptyLine();                  //  | ...
     sscanf(lbuf, "%d", &numOfClasses);              //  | 18
     events = malloc(sizeof(VEVENT) * numOfClasses); //  |
@@ -41,7 +48,16 @@ void readBody()
         sscanf(lbuf, "%s", events[i].SUMMARY);      //  | 高等数学
         readNextUnannoedUnemptyLine();              //  |
         sscanf(lbuf, "%s", events[i].DESCRIPTION);  //  | 陈国延
-        
+        readNextUnannoedUnemptyLine();              //  |
+        sscanf(lbuf, "%s", events[i].DESCRIPTION);  //  | T3201
+        readNextUnannoedUnemptyLine();              //  |
+        sscanf(lbuf, "%s", dts);                    //  | 3-7，9
+        readNextUnannoedUnemptyLine();              //  |
+        sscanf(lbuf, "%s", tts);                    //  | 2
+        //解释日期和时间并存入events
+        events[i].DATETOKEN = genToken(dts, &events[i].dtn);
+        events[i].TIMETOKEN = genToken(tts, &events[i].ttn);
+        //生成UID和时间戳
         genGmStamp(events[i].DTSTAMP);
         genUID(events[i].UID);
     }

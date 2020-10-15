@@ -15,6 +15,7 @@ char outfileName[NAME_MAX]; //SM2.S.2
 char firstMonday[9]; //SM2.S.3
 
 char lbuf[LINE_MAX]; //SM2.S.4
+char obuf[MAX_OBUF_SIZE]; //SM2.S.5
 
 CNUM *clses;    //SM2.T.1
 VEVENT *events; //SM2.T.2

@@ -33,17 +33,23 @@
 
 #define TIMEZONE 28800 //2.C.14
 
-typedef struct VEVENT //SM3.1
+#define MAX_TBUF_SIZE 64     //2.C.15
+#define MAX_OBUF_SIZE 131072 //2.C.17
+
+#define MAX_TOKEN 10 //2.C.16
+
+typedef struct VEVENT //SM3.1, 与标准ics里的VEVENT定义并不相同
 {
     char DTSTAMP[17];
     char UID[UID_LENGTH + 1];
-    char DTEND[16];
-    char DTSTART[16];
-    int isRec;
-    int recCount;
     char LOCATION[LOC_MAX + 1];
     char DESCRIPTION[DES_MAX + 1];
     char SUMMARY[SUMMARY_MAX + 1];
+    Token *DATETOKEN;
+    Token *TIMETOKEN;
+    int dtn;
+    int ttn;
+
 } VEVENT;
 
 typedef struct CNUM //SM3.2
@@ -52,14 +58,25 @@ typedef struct CNUM //SM3.2
     char CEND[7];
 } CNUM;
 
+typedef struct Token //SM3.3
+{
+    int type;
+    union
+    {
+        int be[2];
+        int b;
+    };
+} Token;
+
 extern int argFlag;  //SM2.F.1
 extern int fileFlag; //SM2.F.2
 
 extern char infileName[NAME_MAX];  //SM2.S.1
 extern char outfileName[NAME_MAX]; //SM2.S.2
 
-extern char firstMonday[9]; //SM2.S.3
-extern char lbuf[LINE_MAX]; //SM2.S.4
+extern char firstMonday[9];      //SM2.S.3
+extern char lbuf[LINE_MAX];      //SM2.S.4
+extern char obuf[MAX_OBUF_SIZE]; //SM2.S.5
 
 extern CNUM *clses;    //SM2.T.1
 extern VEVENT *events; //SM2.T.2
@@ -102,3 +119,9 @@ void genGmStamp(char *stamp);                //SM1.C.1
 void genUID(char *uid);                      //SM1.C.2
 void randInit();                             //SM1.C.3
 void clsNoToClsTime(char *start, char *end); //SM1.C.4
+
+//analyzer.c
+Token *genToken(const char *dbuf, int *n); //SM1.A.1
+
+//output.c
+void printHead(); //
