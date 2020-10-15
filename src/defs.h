@@ -44,8 +44,10 @@ typedef struct VEVENT //SM3.1, 与标准ics里的VEVENT定义并不相同
     char LOCATION[LOC_MAX + 1];
     char DESCRIPTION[DES_MAX + 1];
     char SUMMARY[SUMMARY_MAX + 1];
-    char VDATE[MAX_TBUF_SIZE];
-    char VTIME[MAX_TBUF_SIZE];
+    Token *DATETOKEN;
+    Token *TIMETOKEN;
+    int dtn;
+    int ttn;
 
 } VEVENT;
 
@@ -117,4 +119,4 @@ void randInit();                             //SM1.C.3
 void clsNoToClsTime(char *start, char *end); //SM1.C.4
 
 //analyzer.c
-Token *genToken(const char *dbuf); //SM
+Token *genToken(const char *dbuf, int *n); //SM1.A.1
