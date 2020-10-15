@@ -33,7 +33,8 @@
 
 #define TIMEZONE 28800 //2.C.14
 
-#define MAX_TBUF_SIZE 64 //2.C.15
+#define MAX_TBUF_SIZE 64     //2.C.15
+#define MAX_OBUF_SIZE 131072 //2.C.17
 
 #define MAX_TOKEN 10 //2.C.16
 
@@ -73,8 +74,9 @@ extern int fileFlag; //SM2.F.2
 extern char infileName[NAME_MAX];  //SM2.S.1
 extern char outfileName[NAME_MAX]; //SM2.S.2
 
-extern char firstMonday[9]; //SM2.S.3
-extern char lbuf[LINE_MAX]; //SM2.S.4
+extern char firstMonday[9];      //SM2.S.3
+extern char lbuf[LINE_MAX];      //SM2.S.4
+extern char obuf[MAX_OBUF_SIZE]; //SM2.S.5
 
 extern CNUM *clses;    //SM2.T.1
 extern VEVENT *events; //SM2.T.2
@@ -120,3 +122,6 @@ void clsNoToClsTime(char *start, char *end); //SM1.C.4
 
 //analyzer.c
 Token *genToken(const char *dbuf, int *n); //SM1.A.1
+
+//output.c
+void printHead(); //

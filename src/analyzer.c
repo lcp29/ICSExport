@@ -14,7 +14,7 @@ Token *genToken(const char *dbuf, int *n)
     ++sz;
     *n = sz;
     Token *token = malloc(sizeof(Token) * sz);
-    char abuf[7];       //存储数值，这里的大小就写死了
+    char abuf[7];       //存储数值，这里的大小就写死了o
     int c = 0;          //abuf索引
     int tokenIndex = 0; //token索引
     for (int i = 0; i <= strlen(dbuf); ++i)
