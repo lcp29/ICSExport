@@ -35,6 +35,8 @@
 
 #define MAX_TBUF_SIZE 64 //2.C.15
 
+#define MAX_TOKEN 10 //2.C.16
+
 typedef struct VEVENT //SM3.1, 与标准ics里的VEVENT定义并不相同
 {
     char DTSTAMP[17];
@@ -44,7 +46,7 @@ typedef struct VEVENT //SM3.1, 与标准ics里的VEVENT定义并不相同
     char SUMMARY[SUMMARY_MAX + 1];
     char VDATE[MAX_TBUF_SIZE];
     char VTIME[MAX_TBUF_SIZE];
-    
+
 } VEVENT;
 
 typedef struct CNUM //SM3.2
@@ -52,6 +54,16 @@ typedef struct CNUM //SM3.2
     char CBEGIN[7];
     char CEND[7];
 } CNUM;
+
+typedef struct Token //SM3.3
+{
+    int type;
+    union
+    {
+        int be[2];
+        int b;
+    };
+} Token;
 
 extern int argFlag;  //SM2.F.1
 extern int fileFlag; //SM2.F.2
@@ -103,3 +115,6 @@ void genGmStamp(char *stamp);                //SM1.C.1
 void genUID(char *uid);                      //SM1.C.2
 void randInit();                             //SM1.C.3
 void clsNoToClsTime(char *start, char *end); //SM1.C.4
+
+//analyzer.c
+Token *genToken(const char *dbuf); //SM
