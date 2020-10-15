@@ -33,17 +33,18 @@
 
 #define TIMEZONE 28800 //2.C.14
 
-typedef struct VEVENT //SM3.1
+#define MAX_TBUF_SIZE 64 //2.C.15
+
+typedef struct VEVENT //SM3.1, 与标准ics里的VEVENT定义并不相同
 {
     char DTSTAMP[17];
     char UID[UID_LENGTH + 1];
-    char DTEND[16];
-    char DTSTART[16];
-    int isRec;
-    int recCount;
     char LOCATION[LOC_MAX + 1];
     char DESCRIPTION[DES_MAX + 1];
     char SUMMARY[SUMMARY_MAX + 1];
+    char VDATE[MAX_TBUF_SIZE];
+    char VTIME[MAX_TBUF_SIZE];
+    
 } VEVENT;
 
 typedef struct CNUM //SM3.2

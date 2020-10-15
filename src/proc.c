@@ -41,7 +41,13 @@ void readBody()
         sscanf(lbuf, "%s", events[i].SUMMARY);      //  | 高等数学
         readNextUnannoedUnemptyLine();              //  |
         sscanf(lbuf, "%s", events[i].DESCRIPTION);  //  | 陈国延
-        
+        readNextUnannoedUnemptyLine();              //  |
+        sscanf(lbuf, "%s", events[i].DESCRIPTION);  //  | T3201
+        readNextUnannoedUnemptyLine();              //  |
+        sscanf(lbuf, "%s", events[i].VDATE);        //  | 3-7，9
+        readNextUnannoedUnemptyLine();              //  |
+        sscanf(lbuf, "%s", events[i].VTIME);        //  | 2
+        //生成UID和时间戳
         genGmStamp(events[i].DTSTAMP);
         genUID(events[i].UID);
     }
