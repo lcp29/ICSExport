@@ -16,7 +16,7 @@ void printHead()
                           "BEGIN:STANDARD\n"
                           "DTSTART:16000101T000000\n"
                           "TZOFFSETFROM:+0800\n"
-                          "TZOFFSETTO:+0800"
+                          "TZOFFSETTO:+0800\n"
                           "END:STANDARD\n"
                           "END:TIMEZONE\n");
     pObuf = strlen(obuf);
@@ -69,7 +69,7 @@ void printVEvent(VEVENT *vEvent)
                                       "CLASS:PUBLIC\n"
                                       "DTSTAMP:%s\n"
                                       "UID:%s\n"
-                                      "SUMMERY:%s\n"
+                                      "SUMMARY:%s\n"
                         "DTEND;TZID=Asia/Shanghai:%s\n"
                         "DTSTART;TZID=Asia/Shanghai:%s\n",
                         vEvent->DTSTAMP,
@@ -85,7 +85,7 @@ void printVEvent(VEVENT *vEvent)
                 }
                 sprintf(obuf + pObuf, "LOCATION:%s\n"
                                       "DESCRIPTION:%s\n"
-                                      "TRANSP=OPAQUE\n"
+                                      "TRANSP:OPAQUE\n"
                                       "END:VEVENT\n",
                         vEvent->LOCATION,
                         vEvent->DESCRIPTION);

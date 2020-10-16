@@ -33,5 +33,11 @@ int main(int argc, char *argv[])
     writeFile();
     closeScript();
     freeMem();
+    /*
+    int a;
+    Token *t = genToken("1-2,3-4", &a);
+    printf("%d\n\n", a);
+    for (int i = 0; i < a; ++i)
+        printf("%-12d%-12d%-12d%-12d\n", t[i].type, t[i].b, t[i].be[0], t[i].be[1]);*/
     return 0;
 }
