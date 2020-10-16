@@ -94,3 +94,9 @@ void readNextUnannoedUnemptyLine()
     }
     return;
 }
+
+void writeFile()
+{
+    fprintf(dest, "%s", obuf);
+    return;
+}
