@@ -38,6 +38,16 @@
 
 #define MAX_TOKEN 10 //2.C.16
 
+typedef struct Token //SM3.3
+{
+    int type;
+    union
+    {
+        int be[2];
+        int b;
+    };
+} Token;
+
 typedef struct VEVENT //SM3.1, 与标准ics里的VEVENT定义并不相同
 {
     char DTSTAMP[17];
@@ -57,16 +67,6 @@ typedef struct CNUM //SM3.2
     char CBEGIN[7];
     char CEND[7];
 } CNUM;
-
-typedef struct Token //SM3.3
-{
-    int type;
-    union
-    {
-        int be[2];
-        int b;
-    };
-} Token;
 
 extern int argFlag;  //SM2.F.1
 extern int fileFlag; //SM2.F.2
