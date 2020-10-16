@@ -108,6 +108,7 @@ void closeScript();                 //SM1.F.3
 void readLine();                    //SM1.F.4
 void readNextUnemptyLine();         //SM1.F.5
 void readNextUnannoedUnemptyLine(); //SM1.F.6
+void writeFile();                   //SM1.F.7
 
 //proc.c
 void readHead(); //SM1.P.1
