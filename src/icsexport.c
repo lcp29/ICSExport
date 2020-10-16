@@ -24,7 +24,12 @@ int main(int argc, char *argv[])
         return 0; //是安全的
     readHead();
     readBody();
+    //打印输出
     printHead();
+    for (int i = 0; i < numOfEvents; ++i)
+        printVEvent(events + i);
+    printTail();
+    //收尾阶段
     writeFile();
     closeScript();
     freeMem();

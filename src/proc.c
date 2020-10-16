@@ -29,6 +29,7 @@ void freeMem()
     {
         free(events[i].DATETOKEN);
         free(events[i].TIMETOKEN);
+        free(events[i].WTOKEN);
     }
     free(clses);
     free(events);
@@ -39,27 +40,30 @@ void readBody()
 {
     char dts[MAX_TBUF_SIZE];
     char tts[MAX_TBUF_SIZE];
-    readNextUnannoedUnemptyLine();                  //  | ...
-    sscanf(lbuf, "%d", &numOfClasses);              //  | 18
-    events = malloc(sizeof(VEVENT) * numOfClasses); //  |
-    for (int i = 0; i < numOfClasses; i++)          //  |
-    {                                               //  |
-        readNextUnannoedUnemptyLine();              //  |
-        sscanf(lbuf, "%s", events[i].SUMMARY);      //  | 高等数学
-        readNextUnannoedUnemptyLine();              //  |
-        sscanf(lbuf, "%s", events[i].DESCRIPTION);  //  | 陈国延
-        readNextUnannoedUnemptyLine();              //  |
-        sscanf(lbuf, "%s", events[i].DESCRIPTION);  //  | T3201
-        readNextUnannoedUnemptyLine();              //  |
-        sscanf(lbuf, "%s", dts);                    //  | 3-7，9
-        readNextUnannoedUnemptyLine();              //  |
-        sscanf(lbuf, "%s", tts);                    //  | 2
+    char wts[MAX_TBUF_SIZE];
+    readNextUnannoedUnemptyLine();                 //  | ...
+    sscanf(lbuf, "%d", &numOfEvents);              //  | 18
+    events = malloc(sizeof(VEVENT) * numOfEvents); //  |
+    for (int i = 0; i < numOfEvents; i++)          //  |
+    {                                              //  |
+        readNextUnannoedUnemptyLine();             //  |
+        sscanf(lbuf, "%s", events[i].SUMMARY);     //  | 高等数学
+        readNextUnannoedUnemptyLine();             //  |
+        sscanf(lbuf, "%s", events[i].DESCRIPTION); //  | 陈国延
+        readNextUnannoedUnemptyLine();             //  |
+        sscanf(lbuf, "%s", events[i].LOCATION);    //  | T3201
+        readNextUnannoedUnemptyLine();             //  |
+        sscanf(lbuf, "%s", dts);                   //  | 3-7，9    <-周数
+        readNextUnannoedUnemptyLine();             //  |
+        sscanf(lbuf, "%s", wts);                   //  | 2,5       <-周几上
+        readNextUnannoedUnemptyLine();             //  |
+        sscanf(lbuf, "%s", tts);                   //  | 2         <-第几节
         //解释日期和时间并存入events
         events[i].DATETOKEN = genToken(dts, &events[i].dtn);
         events[i].TIMETOKEN = genToken(tts, &events[i].ttn);
-        //生成UID和时间戳
+        events[i].WTOKEN = genToken(wts, &events[i].wtn);
+        //生成时间戳
         genGmStamp(events[i].DTSTAMP);
-        genUID(events[i].UID);
     }
     return;
 }

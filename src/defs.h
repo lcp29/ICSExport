@@ -26,10 +26,10 @@
 //#define ABORT 1 << 1
 #define SEOF 1 << 2 //SM2.C.13
 
-#define UID_LENGTH 31  //SM2.C.9
-#define LOC_MAX 31     //SM2.C.10
-#define SUMMARY_MAX 15 //SM2.C.11
-#define DES_MAX 63     //SM2.C.12
+#define UID_LENGTH 31   //SM2.C.9
+#define LOC_MAX 31      //SM2.C.10
+#define SUMMARY_MAX 127 //SM2.C.11
+#define DES_MAX 127     //SM2.C.12
 
 #define TIMEZONE 28800 //2.C.14
 
@@ -51,15 +51,15 @@ typedef struct Token //SM3.3
 typedef struct VEVENT //SM3.1, 与标准ics里的VEVENT定义并不相同
 {
     char DTSTAMP[17];
-    char UID[UID_LENGTH + 1];
     char LOCATION[LOC_MAX + 1];
     char DESCRIPTION[DES_MAX + 1];
     char SUMMARY[SUMMARY_MAX + 1];
     Token *DATETOKEN;
     Token *TIMETOKEN;
+    Token *WTOKEN;
     int dtn;
     int ttn;
-
+    int wtn;
 } VEVENT;
 
 typedef struct CNUM //SM3.2
@@ -84,6 +84,8 @@ extern VEVENT *events; //SM2.T.2
 extern int numOfClasses; //SM2.O.1
 extern int numOfEvents;  //SM2.O.2
 
+extern int pObuf; //SM2.O.3
+
 //boot.c
 void readArguments(int argc, const char *argv[]); //SM1.B.1
 void argumentTranslator(const char *arg);         //SM1.B.2
@@ -100,6 +102,7 @@ void lastDay(const char *now, char *last);                //SM1.D.3
 int isLeapYear(int now);                                  //SM1.D.4
 void nextWeek(const char *now, char *next);               //SM1.D.5
 void lastWeek(const char *now, char *last);               //SM1.D.6
+void evalNthMonday(char *mon, int n);                     //SM1.D.7
 
 //fop.c
 void openScript();                  //SM1.F.1
@@ -125,4 +128,6 @@ void clsNoToClsTime(char *start, char *end); //SM1.C.4
 Token *genToken(const char *dbuf, int *n); //SM1.A.1
 
 //output.c
-void printHead(); //
+void printHead();                 //SM1.T.1
+void printTail();                 //SM1.T.2
+void printVEvent(VEVENT *vEvent); //SM1.T.3
