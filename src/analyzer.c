@@ -28,11 +28,14 @@ Token *genToken(const char *dbuf, int *n)
             c = 0;
             for (; dbuf[i] != ',' && dbuf[i] != '\0'; ++i)
                 abuf[c++] = dbuf[i];
+            if(dbuf[i] == ',')
+                ++i;
             abuf[c] = '\0';
+            c = 0;
             token[tokenIndex].be[1] = atoi(abuf);
             ++tokenIndex;
         }
-        if (dbuf[i] == ',' || dbuf[i] == '\0')
+        else if (dbuf[i] == ',' || dbuf[i] == '\0')
         {
             abuf[c] = '\0';
             token[tokenIndex].type = 1;

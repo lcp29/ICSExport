@@ -22,3 +22,5 @@ VEVENT *events; //SM2.T.2
 
 int numOfClasses = 1; //SM2.O.1
 int numOfEvents = 1;  //SM2.O.2
+
+int pObuf = 0; //SM2.O.3

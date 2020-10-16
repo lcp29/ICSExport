@@ -92,3 +92,10 @@ void lastWeek(const char *now, char *last)
         lastDay(last, last);
     return;
 }
+
+void evalNthMonday(char *mon, int n)
+{
+    strncpy(mon, firstMonday, 8);
+    for (int i = 1; i < n; ++i)
+        nextWeek(mon, mon);
+}
