@@ -28,7 +28,7 @@ ICS课表制作工具，从自写脚本或Excel表格(*.xlsx)文件生成.ics文
 pip install xlrd
 ```
 
-打包成可执行需要安装
+打包成可执行文件需要安装
 
 ```
 pip install pyinstaller
