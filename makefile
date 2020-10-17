@@ -1,8 +1,8 @@
 
 CC = gcc
 
-FILE_SRC = icsexport global boot other dateop fop proc clk analyzer output
-FILE_H = defs.h
+FILE_SRC = genics/icsexport genics/global genics/boot genics/other genics/dateop genics/fop genics/proc genics/clk genics/analyzer genics/output
+FILE_H = genics/defs.h
 
 build: $(addprefix src/, $(addsuffix .c, $(FILE_SRC))) $(addprefix src/, $(FILE_H))
 	$(CC) -o $(addprefix bin/, icsexport.exe) $(addprefix src/, $(addsuffix .c, $(FILE_SRC)))
