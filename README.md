@@ -10,15 +10,15 @@ ICS课表制作工具，从自写脚本或Excel表格(*.xlsx)文件生成.ics文
 
 脚本：
 
-![](.\doc\img\script.png)
+![](\doc\img\script.png)
 
 **生成的ics文件：**
 
-![](.\doc\img\ics.png)
+![](\doc\img\ics.png)
 
 **日历效果：**
 
-![](.\doc\img\calendar.png)
+![](\doc\img\calendar.png)
 
 **从源码运行：**
 
