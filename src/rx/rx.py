@@ -6,7 +6,7 @@
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
-from os import system
+import os
 import xlrd
 
 file_path = ''
@@ -124,8 +124,7 @@ def btn2_onclick():
         ofile.write(i.week + '\n')
         ofile.write(i.wcnt + '\n')
         ofile.write(i.clas + '\n')
-    system('D:\\Programming\\Projects\\ICSExport\\src\\rxicsexport.exe ' + file_path[0:file_path.rfind('.')] + '.ics')
-    tk.messagebox.showinfo('提示', '转换完成')
+    tk.messagebox.showinfo('提示', '转换完成，请将产生的.tmp文件传入icsexport.exe进行第二步操作')
 
 
 def about():
