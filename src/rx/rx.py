@@ -6,6 +6,7 @@
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
+from os import system
 import xlrd
 
 file_path = ''
@@ -63,7 +64,7 @@ def updatelist():
                         end = True
                     elif(buf[b+1] == ','):
                         end = True
-                        a = buf.find('[', b) + 1
+                        a = b + 2
                         b = a + 1
                 v.wcnt = str(c)
                 v.clas = str(r-2)
@@ -108,6 +109,9 @@ def btn1_onclick():
 
 def btn2_onclick():
     refresh_filepath()
+    if exist == False:
+        tk.messagebox.showerror('错误', '文件打开失败')
+        return
     ofile_path = file_path[0:file_path.rfind('.')] + '.tmp'
     ofile = open(ofile_path, 'w+')
     # 注意：这里的周日期是硬编码的，需要根据实际情况改动
@@ -120,6 +124,8 @@ def btn2_onclick():
         ofile.write(i.week + '\n')
         ofile.write(i.wcnt + '\n')
         ofile.write(i.clas + '\n')
+    system('D:\\Programming\\Projects\\ICSExport\\src\\rxicsexport.exe ' + file_path[0:file_path.rfind('.')] + '.ics')
+    tk.messagebox.showinfo('提示', '转换完成')
 
 
 def about():
