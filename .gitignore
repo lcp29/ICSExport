@@ -7,3 +7,6 @@ obj/
 
 #.vscode文件夹
 .vscode/
+
+#测试用
+src/rx/icsexport.exe
