@@ -6,7 +6,7 @@
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
-from os import system
+import os
 import xlrd
 
 file_path = ''
@@ -115,7 +115,7 @@ def btn2_onclick():
     ofile_path = file_path[0:file_path.rfind('.')] + '.tmp'
     ofile = open(ofile_path, 'w+')
     # 注意：这里的周日期是硬编码的，需要根据实际情况改动
-    ofile.write('7-20201012\n6\n083000-101500\n103000-121500\n140000-154500\n160000-174500\n184500-203000\n204500-223000\n')
+    ofile.write(date_entry.get() + '\n6\n083000-101500\n103000-121500\n140000-154500\n160000-174500\n184500-203000\n204500-223000\n')
     ofile.write(str(len(vevents)) + '\n')
     for i in vevents:
         ofile.write(i.summ + '\n')
@@ -124,8 +124,7 @@ def btn2_onclick():
         ofile.write(i.week + '\n')
         ofile.write(i.wcnt + '\n')
         ofile.write(i.clas + '\n')
-    system('D:\\Programming\\Projects\\ICSExport\\src\\rxicsexport.exe ' + file_path[0:file_path.rfind('.')] + '.ics')
-    tk.messagebox.showinfo('提示', '转换完成')
+    tk.messagebox.showinfo('提示', '转换完成，请将产生的.tmp文件传入icsexport.exe进行第二步操作')
 
 
 def about():
@@ -134,7 +133,7 @@ def about():
     about_win.title('关于')
     win.resizable(0, 0)
     tk.Label(about_win, font=(
-        'Microsoft Yahei UI', 11), text='哈深xlsx转ics小助手@0402').pack()
+        'Microsoft Yahei UI', 11), text='哈深xlsx转ics小助手@lcp29').pack()
     tk.Button(about_win, font=(
         'Microsoft Yahei UI', 11), text='确定', command=about_win.destroy).pack()
     about_win.mainloop()
@@ -142,29 +141,32 @@ def about():
 
 win = tk.Tk()
 win.title('xlsx转ics（哈深）')
-win.geometry('800x600')
+win.geometry('800x625')
 win.resizable(0, 0)
 
 tk.Label(win, text='Excel文件位置：', font=(
     'Microsoft Yahei UI', 11)).place(x=10, y=15, anchor='nw')
 
 tk.Label(win, text='VEVENT列表：', font=('Microsoft Yahei UI', 11)
-         ).place(x=10, y=45, anchor='nw')
+         ).place(x=10, y=79, anchor='nw')
 
 tk.Label(win, text='体育上课地点的前几个字（必须与Excel文件中的相同）：', font=(
-    'Microsoft Yahei UI', 11)).place(x=150, y=45, anchor='nw')
+    'Microsoft Yahei UI', 11)).place(x=10, y=47, anchor='nw')
+
+tk.Label(win, text='某一周的周数和这周周一的日期（X-yyyyMMdd）：', font=(
+    'Microsoft Yahei UI', 11)).place(x=334, y=79, anchor='nw')
 
 tk.Button(win, text='浏览', font=('Microsoft Yahei UI', 11), command=btn1_onclick
           ).place(x=729, y=13, width=60, height=30, anchor='nw')
 
 tk.Button(win, text='开始转换', font=('Microsoft Yahei UI', 11),
-          command=btn2_onclick).place(x=405, y=555, width=385, anchor='nw')
+          command=btn2_onclick).place(x=405, y=580, width=385, anchor='nw')
 
 tk.Button(win, text='刷新', font=('Microsoft Yahei UI', 11),
-          command=refresh_filepath).place(x=70, y=555, width=325, anchor='nw')
+          command=refresh_filepath).place(x=70, y=580, width=325, anchor='nw')
 
 tk.Button(win, text='关于', font=('Microsoft Yahei UI', 11),
-          command=about).place(x=10, y=555, width=50)
+          command=about).place(x=10, y=580, width=50)
 
 file_entry = tk.Entry(win, font=(
     'Microsoft Yahei UI', 11))
@@ -172,10 +174,14 @@ file_entry = tk.Entry(win, font=(
 gym_entry = tk.Entry(win, font=(
     'Microsoft Yahei UI', 11))
 
+date_entry = tk.Entry(win, font=(
+    'Microsoft Yahei UI', 11))
+
 vlist = tk.Listbox(win)
 
 file_entry.place(x=127, y=16, width=591, anchor='nw')
-gym_entry.place(x=535, y=46, width=254, anchor='nw')
-vlist.place(x=10, y=75, width=780, height=470, anchor='nw')
+gym_entry.place(x=395, y=48, width=394, anchor='nw')
+date_entry.place(x=689, y=79,width=100, anchor='nw')
+vlist.place(x=10, y=109, width=780, height=461, anchor='nw')
 
 win.mainloop()
