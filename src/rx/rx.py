@@ -38,7 +38,7 @@ def updatelist():
         return
     vevents.clear()
     for c in range(1, 7):
-        for r in range(3, 8):
+        for r in range(3, 9):
             buf = sheet.cell_value(r, c)
             if buf.isspace() or buf == '':
                 continue
