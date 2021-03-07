@@ -2,6 +2,8 @@
 
 ![GitHub](https://img.shields.io/github/license/lcp29/ICSExport)![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/lcp29/icsexport)![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/lcp29/icsexport)
 
+**md怎么这学期的课表还有单双周，就真得直接读网页吗QAQ**
+
 ICS课表制作工具，从自写脚本或Excel表格(*.xlsx)文件生成.ics文件，可直接导入iOS日历。
 
 **目前只支持哈尔滨工业大学（深圳）教务系统导出的Excel表格。**
