@@ -17,7 +17,7 @@ global workbook
 global sheet
 
 
-class vevent:
+class vevent(object):
     summ = 'nil'
     desc = 'nil'
     loca = 'nil'
@@ -37,7 +37,7 @@ def updatelist():
     if exist == False:
         return
     vevents.clear()
-    for c in range(1, 7):
+    for c in range(1, 8):
         for r in range(3, 9):
             buf = sheet.cell_value(r, c)
             if buf.isspace() or buf == '':
@@ -54,7 +54,7 @@ def updatelist():
                 while end == False:
                     a = buf.find('[', a) + 1
                     b = buf.find(']', a)
-                    if(buf[a:b].startswith('T') or buf[a:b].startswith('G') or buf[a:b].startswith('H') or buf[a:b].startswith(gym_name)):
+                    if(buf[a:b].startswith('T') or buf[a:b].startswith('G') or buf[a:b].startswith('H') or buf[a:b].startswith('K') or buf[a:b].startswith(gym_name)):
                         v.loca = buf[a:b]
                     elif(buf[a:b].endswith('周')):
                         v.week = buf[a:b-1]
