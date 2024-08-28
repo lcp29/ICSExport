@@ -5,7 +5,7 @@ from datetime import datetime
 from datetime import timedelta
 from ics import Calendar, Event
 
-cookie = 'JSESSIONID=1B4723B2D14A74A1B71528B9D294F9A0; route=cb5f888c9cb0d85c260c8284847d46e6'
+cookie = '<replace with your cookie>'
 url = 'http://jw.hitsz.edu.cn/xszykb/queryxszykbzhou'
 year = '2024-2025'
 semester = '1'
