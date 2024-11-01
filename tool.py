@@ -67,7 +67,9 @@ for week in range(1, 17):
         eobj.begin = starttime
         endtime = monday + timedelta(days=event[2] - 1, hours=times[event[3] - 1][2], minutes=times[event[3] - 1][3])
         eobj.end = endtime
-        eobj.location = re.findall(r'\[(.*?)\]', eobj.description)[-1]
+        loc = re.findall(r'\[(.*?)\]', eobj.description)
+        if len(loc) > 0:
+            eobj.location = loc[-1]
         semester_calender.events.add(eobj)
 
 with open('semester.ics', 'w+') as f:
